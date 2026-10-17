@@ -1,0 +1,12 @@
+{
+  "name": "Grandir Ensemble 2027",
+  "short_name": "Grandir",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#F5F6FA",
+  "theme_color": "#12306E",
+  "icons": [
+    { "src": "assets/brand/icon-180.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "assets/brand/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

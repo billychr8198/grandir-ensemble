@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Grandir Ensemble — 2027</title>
+  <meta name="description" content="Grandir Ensemble: a French-themed daily planner game for January – April 2027. Plan your day in time blocks, keep your word, earn gems and help a nation grow.">
+  <meta name="theme-color" content="#12306E">
+  <link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg">
+  <link rel="apple-touch-icon" href="assets/brand/icon-180.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta property="og:title" content="Grandir Ensemble — 2027">
+  <meta property="og:description" content="Plan your day, keep your word, help a nation grow. A French daily-planner game, January – April 2027.">
+  <meta property="og:image" content="assets/brand/icon-512.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..700&family=Jost:ital,wght@0,300..700;1,400&family=Parisienne&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="tricolore" aria-hidden="true"><span></span><span></span><span></span></div>
+
+  <!-- ============ Sign-in ============ -->
+  <section id="login" class="login" hidden>
+    <div class="login-card">
+      <img class="login-logo" src="assets/brand/grandir-ensemble-logo.webp" alt="Grandir Ensemble" width="360" height="360">
+      <p class="login-lede">A daily planner for January to April 2027. Plan your day, keep your word, and watch a nation grow with you.</p>
+      <div id="profileList" class="profile-list"></div>
+      <form id="createForm" class="create-form" autocomplete="off">
+        <h2>Join the programme</h2>
+        <label class="field"><span>Your name</span><input name="name" required maxlength="40" placeholder="e.g. Billy"></label>
+        <label class="field"><span>4-digit PIN <small>optional, keeps others on this device out</small></span><input name="pin" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" placeholder="••••"></label>
+        <fieldset class="seg">
+          <legend>Calendar</legend>
+          <label><input type="radio" name="mode" value="real" checked><span><b>Real dates</b><small>Days follow your clock</small></span></label>
+          <label><input type="radio" name="mode" value="sandbox"><span><b>Practice</b><small>Move the date yourself to try the game</small></span></label>
+        </fieldset>
+        <button class="btn btn-primary btn-lg" type="submit">Create profile and enter</button>
+      </form>
+      <p class="fineprint">Your plans stay in this browser. Nothing is sent anywhere.</p>
+    </div>
+  </section>
+
+  <!-- ============ App ============ -->
+  <div id="app" class="app" hidden>
+    <header class="masthead">
+      <a class="brand" href="#/home" aria-label="Grandir Ensemble — home">
+        <img src="assets/brand/icon-180.png" alt="" width="44" height="44">
+        <span class="brand-word"><span class="bw-1">Grandir</span><span class="bw-2">ensemble</span></span>
+      </a>
+      <div class="status">
+        <div class="chip chip-date" id="chipDate"></div>
+        <button class="chip chip-gems" id="chipGems" title="Gems in your treasury"></button>
+        <button class="chip chip-elan" id="chipElan" title="Élan national — the momentum behind every indicator"></button>
+        <div class="menu-wrap">
+          <button class="icon-btn" id="menuBtn" aria-haspopup="true" aria-expanded="false" aria-label="Settings and profile"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></button>
+          <div class="menu" id="menu" role="menu" hidden></div>
+        </div>
+      </div>
+    </header>
+    <div class="sandbox-bar" id="sandboxBar" hidden></div>
+
+    <nav class="tabs" id="tabs" aria-label="Sections">
+      <a href="#/home" data-tab="home"><svg viewBox="0 0 24 24"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/></svg><span>Accueil</span></a>
+      <a href="#/calendar" data-tab="calendar"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><span><span class="lg">Calendrier</span><span class="sm">Agenda</span></span></a>
+      <a href="#/indicators" data-tab="indicators"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span><span class="lg">Indicateurs</span><span class="sm">Indices</span></span></a>
+      <a href="#/album" data-tab="album"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="16" rx="1"/><circle cx="12" cy="11" r="3"/><path d="M8 17h8"/></svg><span>Album</span></a>
+      <a href="#/map" data-tab="map"><svg viewBox="0 0 24 24"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/></svg><span>Carte</span></a>
+      <a href="#/media" data-tab="media"><svg viewBox="0 0 24 24"><circle cx="7" cy="17" r="3"/><circle cx="18" cy="15" r="3"/><path d="M10 17V5l11-2v12"/></svg><span><span class="lg">Médiathèque</span><span class="sm">Médias</span></span></a>
+      <a href="#/courage" data-tab="courage"><svg viewBox="0 0 24 24"><path d="M12 3v3M4.2 6.2l2.1 2.1M19.8 6.2l-2.1 2.1M3 14h3M18 14h3"/><path d="M7 18a5 5 0 0 1 10 0"/><path d="M3 21h18"/></svg><span>Courage</span></a>
+    </nav>
+
+    <main id="view" class="view" tabindex="-1"></main>
+
+    <footer class="foot">
+      <img src="assets/brand/flag-france.webp" alt="" width="42" height="28" style="margin:0 auto 10px;border-radius:3px;box-shadow:0 0 0 1px var(--trait)">
+      <p><span class="script">Liberté, égalité, fraternité</span> — and a little progress every day.</p>
+      <p class="fineprint">Grandir Ensemble is a personal productivity game. The government voice is role-play: it is not affiliated with or endorsed by the French Government. Department map created with mapchart.net. Indicator values are a game model calibrated on public data (UNDP, OECD, World Bank, WHR, IEP, Atout France).</p>
+    </footer>
+  </div>
+
+  <!-- ============ overlays ============ -->
+  <div id="modalRoot"></div>
+  <div id="toastRoot" class="toasts" aria-live="polite"></div>
+  <canvas id="confetti" aria-hidden="true"></canvas>
+
+  <script src="js/economy.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/zoom.js"></script>
+  <script src="js/collection-data.js"></script>
+  <script src="js/departments.js"></script>
+  <script src="js/content.js"></script>
+  <script src="js/app-core.js"></script>
+  <script src="js/view-plan.js"></script>
+  <script src="js/view-more.js"></script>
+  <script>GE.boot();</script>
+</body>
+</html>
